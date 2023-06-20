@@ -125,7 +125,8 @@ def defineObjects(tree):
     )
     # Cleaned Electrons
     clElectrons = cleanElectrons(electrons, muons)
-    
+
+    #CHS ('tree.Jet' IS CHS ONLY WHEN RUNNING ON RUN2 SAMPLES. TO BE ADDRESSED)
     # AK4 Jets
     ak4Jets = op.sort(
         op.select(tree.Jet, lambda jet: ak4jetDef(jet)), lambda jet: -jet.pt)
@@ -149,6 +150,54 @@ def defineObjects(tree):
     ak4Jetsetag2p4 = op.select(
         ak4JetsID, lambda jet: op.abs(jet.eta) > 2.4)
 
+    #PUPPI ('tree.JetPuppi' WILL ONLY WORK IN CUSTOM NANO FLAVORS FOR RUN2, AS PUPPI WAS NOT INCLUDED IN CENTRAL PRODUCTIONS. TO BE ADDRESSED)
+    # AK4 Jets
+    ak4PUPPIJets = op.sort(
+        op.select(tree.JetPuppi, lambda jet: ak4jetDef(jet)), lambda jet: -jet.pt)
+    
+    ## jet - lepton cleaning
+    clak4PUPPIJets = cleanJets(ak4PUPPIJets, muons, clElectrons)
+    
+    ## jet ID & pT recommendations
+    ak4PUPPIJetsID = op.select(
+        clak4PUPPIJets, lambda jet: jet.jetId & 2)
+    
+    ak4PUPPIJetspt40 = op.select(
+        ak4PUPPIJetsID, lambda jet: jet.pt > 40)
 
-    return muons, electrons, clElectrons, ak4Jets, clak4Jets, ak4JetsID, ak4Jetspt40, ak4Jetspt100, ak4Jetsetas2p4, ak4Jetsetag2p4
+    ak4PUPPIJetspt100 = op.select(
+        ak4PUPPIJetsID, lambda jet: jet.pt > 100)
+    
+    ak4PUPPIJetsetas2p4 = op.select(
+        ak4PUPPIJetsID, lambda jet: op.abs(jet.eta) < 2.4)
+    
+    ak4PUPPIJetsetag2p4 = op.select(
+        ak4PUPPIJetsID, lambda jet: op.abs(jet.eta) > 2.4)
+
+    #ABC ('tree.JetABC' WILL ONLY WORK IN CUSTOM NANO FLAVORS FOR RUN2, AS ABC WAS NOT INCLUDED IN CENTRAL PRODUCTIONS. TO BE ADDRESSED)
+    # AK4 Jets
+    ak4ABCJets = op.sort(
+        op.select(tree.JetABC, lambda jet: ak4jetDef(jet)), lambda jet: -jet.pt)
+    
+    ## jet - lepton cleaning
+    clak4ABCJets = cleanJets(ak4ABCJets, muons, clElectrons)
+    
+    ## jet ID & pT recommendations
+    #ak4ABCJetsID = op.select(
+        #clak4ABCJets, lambda jet: jet.jetId & 2) #no jetId available for ABC, commenting this part out
+    ak4ABCJetsID = clak4ABCJets #instead, use the cleaned ABC jets as a proxy for the ID ABC jets
+ 
+    ak4ABCJetspt40 = op.select(
+        ak4ABCJetsID, lambda jet: jet.pt > 40)
+
+    ak4ABCJetspt100 = op.select(
+        ak4ABCJetsID, lambda jet: jet.pt > 100)
+    
+    ak4ABCJetsetas2p4 = op.select(
+        ak4ABCJetsID, lambda jet: op.abs(jet.eta) < 2.4)
+    
+    ak4ABCJetsetag2p4 = op.select(
+        ak4ABCJetsID, lambda jet: op.abs(jet.eta) > 2.4)
+    
+    return muons, electrons, clElectrons, ak4Jets, clak4Jets, ak4JetsID, ak4Jetspt40, ak4Jetspt100, ak4Jetsetas2p4, ak4Jetsetag2p4, ak4PUPPIJets, clak4PUPPIJets, ak4PUPPIJetsID, ak4PUPPIJetspt40, ak4PUPPIJetspt100, ak4PUPPIJetsetas2p4, ak4PUPPIJetsetag2p4, ak4ABCJets, clak4ABCJets, ak4ABCJetsID, ak4ABCJetspt40, ak4ABCJetspt100, ak4ABCJetsetas2p4, ak4ABCJetsetag2p4 
     
