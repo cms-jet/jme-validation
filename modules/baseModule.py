@@ -33,10 +33,14 @@ class NanoBaseJME(NanoAODModule, HistogramsModule):
         isDriver = (self.args.distributed == "driver")
         era = sampleCfg['era']  # reserved for future use
         campaign = sampleCfg['campaign']
-        jec = sampleCfg['jec']
-        jet_algo = 'AK4PFPuppi'
-        if jec=='':
-            jec = 'Winter22Run3_V2_MC' if self.is_MC else 'Winter22Run3_RunD_V2_DATA'
+        jecCHS = sampleCfg['jecCHS']
+        jecPUPPI = sampleCfg['jecPUPPI']
+        jecABC = sampleCfg['jecABC']
+        jet_algoCHS = 'AK4PFPuppi'
+        jet_algoPUPPI = 'AK4PFPuppi'
+        jet_algoABC = 'AK4PFPuppi'
+        #if jec=='':
+        #    jec = 'Winter22Run3_V2_MC' if self.is_MC else 'Winter22Run3_RunD_V2_DATA'
         self.triggersPerPrimaryDataset = {}
 
         def addHLTPath(PD, HLT):
@@ -50,8 +54,8 @@ class NanoBaseJME(NanoAODModule, HistogramsModule):
 
         def getNanoAODDescription():
             groups = ["HLT_", "MET_","PV_","Pileup_","Rho_"]
-            collections = ["nElectron", "nJet", "nMuon", "nFatJet", "nSubJet","nGenJet"]
-            varReaders = [CalcCollectionsGroups(Jet=("pt", "mass"))]
+            collections = ["nElectron", "nJet", "nJetPuppi", "nJetABC", "nMuon", "nFatJet", "nSubJet","nGenJet"]
+            varReaders = [CalcCollectionsGroups(Jet=("pt", "mass"), JetPuppi=("pt", "mass"), JetABC=("pt", "mass"))]
             return NanoAODDescription(groups=groups, collections=collections, systVariations=varReaders)
 
         tree, noSel, backend, lumiArgs = super(NanoBaseJME, self).prepareTree(tree=tree,
@@ -102,8 +106,21 @@ class NanoBaseJME(NanoAODModule, HistogramsModule):
 
         #### reapply JECs ###
         from bamboo.analysisutils import configureJets, configureType1MET
-        configureJets(tree._Jet, jet_algo,
-                      jec=jec,
+        #CHS
+        configureJets(tree._Jet, jet_algoCHS,
+                      jec=jecCHS,
+                      mayWriteCache= True,
+                      # cachedir='/afs/cern.ch/user/a/anmalara/workspace/WorkingArea/JME/jme-validation/JECs_2022/',
+                      isMC=self.is_MC, backend = backend)
+        #PUPPI
+        configureJets(tree._JetPuppi, jet_algoPUPPI,
+                      jec=jecPUPPI,
+                      mayWriteCache= True,
+                      # cachedir='/afs/cern.ch/user/a/anmalara/workspace/WorkingArea/JME/jme-validation/JECs_2022/',
+                      isMC=self.is_MC, backend = backend)
+        #ABC
+        configureJets(tree._JetABC, jet_algoABC,
+                      jec=jecABC,
                       mayWriteCache= True,
                       # cachedir='/afs/cern.ch/user/a/anmalara/workspace/WorkingArea/JME/jme-validation/JECs_2022/',
                       isMC=self.is_MC, backend = backend)

@@ -61,7 +61,10 @@ def main():
     #jecs = {'mc': 'Summer22EERun3_V0_MC', 'data': 'Summer22EERun3_RunF_V0_DATA'}
     jecs = {'mc': 'UL_ABCNet_V1_MC', 'data': 'UL_ABCNet_RunA_V1_DATA'}
 
-    extra_info = {'plot_level': 'response'}
+    extra_info = {'plot_level': 'response', 
+                  'jecCHS': {'mc': 'UL_ABCNet_V1_MC', 'data': 'UL_ABCNet_RunA_V1_DATA'},
+                  'jecPUPPI': {'mc': 'UL_ABCNet_V1_MC', 'data': 'UL_ABCNet_RunA_V1_DATA'},
+                  'jecABC': {'mc': 'UL_ABCNet_V1_MC', 'data': 'UL_ABCNet_RunA_V1_DATA'}}
 
 
     #module = 'DY'
