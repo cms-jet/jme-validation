@@ -109,19 +109,19 @@ class NanoBaseJME(NanoAODModule, HistogramsModule):
         #CHS
         configureJets(tree._Jet, jet_algoCHS,
                       jec=jecCHS,
-                      mayWriteCache= True,
+                      mayWriteCache= False,
                       # cachedir='/afs/cern.ch/user/a/anmalara/workspace/WorkingArea/JME/jme-validation/JECs_2022/',
                       isMC=self.is_MC, backend = backend)
         #PUPPI
         configureJets(tree._JetPuppi, jet_algoPUPPI,
                       jec=jecPUPPI,
-                      mayWriteCache= True,
+                      mayWriteCache= False,
                       # cachedir='/afs/cern.ch/user/a/anmalara/workspace/WorkingArea/JME/jme-validation/JECs_2022/',
                       isMC=self.is_MC, backend = backend)
         #ABC
         configureJets(tree._JetABC, jet_algoABC,
                       jec=jecABC,
-                      mayWriteCache= True,
+                      mayWriteCache= False,
                       # cachedir='/afs/cern.ch/user/a/anmalara/workspace/WorkingArea/JME/jme-validation/JECs_2022/',
                       isMC=self.is_MC, backend = backend)
         # configureType1MET(tree._MET,
