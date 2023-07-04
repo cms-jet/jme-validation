@@ -21,7 +21,8 @@ def commandline():
 
 def main():
     extra_info = {}
-    years = ['2022']
+    #years = ['2022']
+    years = ['2018']
     
     # runs = ['C','D']
     # campaigns = {'mc': 'Winter22',   'data': 'Prompt'}
@@ -45,23 +46,29 @@ def main():
     # jecs = {'mc': 'Summer22EERun3_V0_MC', 'data': 'Summer22EERun3_RunF_V0_DATA'} # best
     
 
-    runs = ['G']
-    campaigns = {'mc': 'Summer22_Nominal',      'data': 'Prompt'}
+    #runs = ['G']
+    #campaigns = {'mc': 'Summer22_Nominal',      'data': 'Prompt'}
+    runs = ['A']
+    campaigns = {'mc': 'Summer20'} #no data for now
     # campaigns = {'mc': 'Summer22_NPVA2p0B0p13', 'data': 'PuppiTune'}
     # campaigns = {'mc': 'Summer22_NPVA2p0B0p3',  'data': 'PuppiTune'}
     # campaigns = {'mc': 'Summer22_NPVA3p0B0p13', 'data': 'PuppiTune'}
 
     # campaigns = {'mc': 'Winter22',              'data': 'Prompt'}
     # campaigns = {'mc': 'Summer22_NPVA2p0B0p13', 'data': 'PuppiTune'}
-    campaigns = {'mc': 'Summer22_NPVA2p0B0p3',  'data': 'PuppiTune'}
+    #campaigns = {'mc': 'Summer22_NPVA2p0B0p3',  'data': 'PuppiTune'}
     
-    jecs = {'mc': 'Summer22EERun3_V0_MC', 'data': 'Summer22EERun3_RunF_V0_DATA'}
+    #jecs = {'mc': 'Summer22EERun3_V0_MC', 'data': 'Summer22EERun3_RunF_V0_DATA'}
+    jecs = {'mc': 'UL_ABCNet_V1_MC', 'data': 'UL_ABCNet_RunA_V1_DATA'}
 
-    extra_info = {'plot_level': 'response'}
+    extra_info = {'plot_level': 'response', 
+                  'jecCHS': {'mc': 'UL_ABCNet_V1_MC', 'data': 'UL_ABCNet_RunA_V1_DATA'},
+                  'jecPUPPI': {'mc': 'UL_ABCNet_V1_MC', 'data': 'UL_ABCNet_RunA_V1_DATA'},
+                  'jecABC': {'mc': 'UL_ABCNet_V1_MC', 'data': 'UL_ABCNet_RunA_V1_DATA'}}
 
 
-    module = 'DY'
-    # module = 'QCD'
+    #module = 'DY'
+    module = 'QCD'
     
     # maxFiles=10
     maxFiles=1

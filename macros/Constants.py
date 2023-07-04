@@ -2,15 +2,19 @@ class Constants():
     def __init__(self):
         self.lumi = {
             '2022': {'C': 4.96,'D': 2.94,'E': 5.84,'F': 17.80, 'G': 2},
+            '2018': {'A': 14.0, 'B': 7.1, 'C': 6.94, 'D': 31.93},
         }
         self.energy = {
             '2022': '13.6',
+            '2018': '13.0',
         }
         self.pileup = {
             '2022': 43,
+            '2018': 34,
         }
         self.year_run_map = {
             '2022': ['C','D','E','F','G'],
+            '2018': ['A','B','C','D']
         }
         self.MC_samples = ['DY','TTbar','QCD_Flat']
         self.data_samples = ['Muon', 'JetHT']
@@ -83,7 +87,13 @@ class Constants():
                     # 'QCD_Flat': 'datasets/QCD_Pt_15to7000_Flat_2022_Winter23_Nano10_jme.txt',
                     # 'QCD_Flat_Fix': 'datasets/QCD_Pt_15to7000_Flat_2022_Winter23_Nano10_jme.txt',
                 },
-            }
+            },
+            '2018': {
+                'Summer20': {
+                    'DY': 'datasets/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8_RunIISummer20UL18.txt',
+                    'QCD_Flat': 'datasets/QCD_Pt-15to7000_TuneCP5_Flat2018_13TeV_pythia8_RunIISummer20UL18.txt',
+                },
+            },
         }
 
         self._plot_info = {

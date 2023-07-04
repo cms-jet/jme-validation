@@ -49,7 +49,9 @@ class ModuleRunner(GenericPath, Constants):
                 type_ = self.get_type(dataset=ds, year=year)
                 if not type_ in self.campaigns: continue
                 campaign = self.campaigns[type_]
-                jec = self.jecs[type_] if self.jecs else ''
+                jecCHS = self.extra_info['jecCHS'][type_] #self.jecs[type_] if self.jecs else ''
+                jecPUPPI = self.extra_info['jecPUPPI'][type_] #self.jecs[type_] if self.jecs else ''
+                jecABC = self.extra_info['jecABC'][type_] #self.jecs[type_] if self.jecs else ''
                 sample_infos[ds] = {
                     'era': year,
                     'group': ds,
@@ -58,8 +60,13 @@ class ModuleRunner(GenericPath, Constants):
                     'type': type_,
                     'split': self.split_files_in,
                     'campaign': campaign,
-                    'jec': jec,
+                    'jecCHS': jecCHS,
+                    'jecPUPPI': jecPUPPI,
+                    'jecABC': jecABC,
                     }
+                del self.extra_info['jecCHS']
+                del self.extra_info['jecPUPPI']
+                del self.extra_info['jecABC']
                 sample_infos[ds].update(self.extra_info)
                 if sample_infos[ds]['type']=='mc':
                     sample_infos[ds]['cross-section'] = self.xsec[ds]
